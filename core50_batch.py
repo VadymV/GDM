@@ -22,7 +22,7 @@ if __name__ == "__main__":
     if (dataFlag):
         
         ds = CORe50()
-        ds.loadData()
+        ds.prepare_data()
         
         print ("%s loaded." % ds.sName)
 
@@ -56,6 +56,6 @@ if __name__ == "__main__":
                 emAccuracy = myEpisodicGWR.computeAccuracy(emBmuLabelInstances, ds.testLabels[:,1])
             
                 smBmuWeights, smBmuActivation, smBmuLabelClasses = mySemanticGWR.predict(emBmuWeights, testContext)
-                smAccuracy = mySemanticGWR.computeAccuracy(smBmuLabelClasses, ds.testLabels[:,0])
+                smAccuracy = mySemanticGWR.compute_accuracy(smBmuLabelClasses, ds.testLabels[:, 0])
                 
                 print ("Epoch: %s, EM: %s, SM: %s" % ((e+1), emAccuracy, smAccuracy))
