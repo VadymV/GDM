@@ -57,9 +57,9 @@ class CORe50:
         self.instanceLabelIndex = 259
 
         original_data = self.read_file("reduced_features_instance_based_ResNet50.csv")
-        reduced_data = original_data[original_data[:, 256] < 1000]
+        # reduced_data = original_data[original_data[:, 256] < 1000]
         # prepared_data = normalize_data(reduced_data, 256)
-        prepared_data = reduced_data
+        prepared_data = original_data
 
         sorted_data = None
         for category in range(0, self.numClasses):
@@ -69,11 +69,11 @@ class CORe50:
             else:
                 sorted_data = np.concatenate((sorted_data, category_data), axis=0)
 
-        trainingSet = sorted_data[np.in1d(sorted_data[:, self.sessionColumnIndex], [1])]
-        #trainingSet = sorted_data[np.in1d(sorted_data[:, self.sessionColumnIndex], [1, 2, 4, 5, 6, 8, 9, 11])]
+        #trainingSet = sorted_data[np.in1d(sorted_data[:, self.sessionColumnIndex], [1])]
+        trainingSet = sorted_data[np.in1d(sorted_data[:, self.sessionColumnIndex], [1, 2, 4, 5, 6, 8, 9, 11])]
         trainingSet = self.reduce_number_of_frames(trainingSet, 4)
-        #testSet = sorted_data[np.in1d(sorted_data[:, self.sessionColumnIndex], [3, 7, 10])]
-        testSet = sorted_data[np.in1d(sorted_data[:, self.sessionColumnIndex], [3])]
+        testSet = sorted_data[np.in1d(sorted_data[:, self.sessionColumnIndex], [3, 7, 10])]
+        #testSet = sorted_data[np.in1d(sorted_data[:, self.sessionColumnIndex], [3])]
 
         self.train_category_indices = self.find_category_indices(trainingSet)
         self.test_categoty_indices = self.find_category_indices(testSet)

@@ -116,10 +116,10 @@ class EpisodicGWR(RGWR):
             self.compute_additional_info(epoch, cu_qrror, cu_fcounter, "Episodic", replay)
                 
         # Remove neurons
-        # if context and not replay:
-        #     self.remove_weak_neurons("EM", replay)
-        # elif replay:
-        #     self.remove_weak_neurons("EM", replay)
+        if context and not replay:
+            self.remove_weak_neurons("EM", replay)
+        elif replay:
+            self.remove_weak_neurons("EM", replay)
 
     def calculate_neuron_significance(self, neuron_index) -> None:
         """

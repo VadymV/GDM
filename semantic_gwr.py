@@ -91,10 +91,10 @@ class SemanticGWR(RGWR):
             self.compute_additional_info(epoch, cu_qrror, cu_fcounter, "Semantic", replay)
 
         # Remove neurons
-        # if context and not replay:
-        #     self.remove_weak_neurons("SM", replay)
-        # elif replay:
-        #     self.remove_weak_neurons("SM", replay)
+        if context and not replay:
+            self.remove_weak_neurons("SM", replay)
+        elif replay:
+            self.remove_weak_neurons("SM", replay)
 
     def remove_neuron_label(self, neuron_index):
         self.labels_category_histogram = np.delete(self.labels_category_histogram, neuron_index, axis=0)
